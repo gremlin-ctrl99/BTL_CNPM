@@ -1,9 +1,9 @@
-@if($newCart != null)
+@if(Session::has("Cart") != null)
 <div id="change-item-cart">
     <div class="select-items">
         <table>
             <tbody>
-                @foreach($newCart->products as $item)
+                @foreach(Session::get('Cart')->products as $item)
                 <tr>
                     <td class="si-pic"><img src="{{URL::to('uploads/product/'.$item['productInfo']->product_image)}}" height="60px" width="60px" alt=""></td>
                     <td class="si-text">
@@ -23,7 +23,7 @@
     <div class="select-total">
         <p></p>
         <span style="color:white;">total:</span>
-        <h5 style="color:white;">{{number_format($newCart->totalPrice)}} Đ</h5>
+        <h5 style="color:white;">{{number_format(Session::get('Cart')->totalPrice)}} Đ</h5>
     </div>
 </div>
 @endif

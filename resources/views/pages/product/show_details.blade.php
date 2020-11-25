@@ -33,15 +33,10 @@
             <h2>{{$value->product_name}}</h2>
             <!-- <p>Web ID: 1089772</p> -->
             <img src="images/product-details/rating.png" alt="" />
-            <form action="{{URL::to('/save-cart')}}" method="POST">
-            {{ csrf_field() }}
+            <form>
             <span>
                 <span>{{number_format($value->product_price).' '.'VND'}}</span>
-                <p><label>Số lượng:</label>
-                <input name="qty"type="number" min="1" value="1"/>
-                <input name="productid_hidden" type="hidden" value="{{$value->product_id}}"/>
-                <button type="submit" class="btn btn-fefault cart">
-                <a class="fa fa-shopping-cart"></a>Thêm vào giỏ hàng</button></p>
+                <a onclick="AddCart({{$value->product_id}})" href="javascript:" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
             </span>
             </form>
             <p><b>Tình trạng:</b>Còn hàng</p>
@@ -94,7 +89,7 @@
                                     <img src="{{URL::to('uploads/product/'.$tuongtu->product_image)}}" alt="" />
                                     <h2>{{number_format($tuongtu->product_price).' '.'VND'}}</h2>
                                     <p>{{($tuongtu->product_name)}}</p>
-                                    <a href="{{URL::to('add-to-cart'.$tuongtu->product_id)}}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                    <a onclick="AddCart({{$tuongtu->product_id}})" href="javascript:" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                 </div>
                             </div>
                         </div>

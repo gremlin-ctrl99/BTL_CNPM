@@ -22,7 +22,7 @@ class CartController extends Controller
 
             $request ->Session()->put('Cart',$newCart);
         }
-        return view('pages.carts.cart',compact('newCart'));
+        return view('pages.carts.cart');
     }
 
     public function DeleteItemCart(Request $request,$id){
@@ -35,6 +35,6 @@ class CartController extends Controller
         }else{
             $request->Session()->forget('Cart');
         }
-        return view('pages.carts.cart',compact('newCart'));
+        return view('pages.carts.cart');
     }
 }

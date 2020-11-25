@@ -62,6 +62,35 @@
 								<li class="shopping-cart"><a href="#" ><i class="fa fa-shopping-cart"> Giỏ hàng </i><i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 									<div id="change-item-cart">
+									@if(Session::has("Cart") != null)
+									<div id="change-item-cart">
+										<div class="select-items">
+											<table>
+												<tbody>
+													@foreach(Session::get('Cart')->products as $item)
+													<tr>
+														<td class="si-pic"><img src="{{URL::to('uploads/product/'.$item['productInfo']->product_image)}}" height="60px" width="60px" alt=""></td>
+														<td class="si-text">
+															<div class="product-selected">
+																<p style="color:white;">{{number_format($item['productInfo']->product_price)}} Đ x {{$item['quanty']}}</p>
+																<h6 style="color:white;" >{{$item['productInfo']->product_name}}</h6>
+															</div>
+														</td>
+														<td class="si-close">
+															<i class="ti-close" style="color:white;" data-id ="{{$item['productInfo']->product_id}}">Xóa</i>
+														</td>
+													</tr>
+													@endforeach
+												</tbody>
+											</table>
+										</div>
+										<div class="select-total">
+											<p></p>
+											<span style="color:white;">total:</span>
+											<h5 style="color:white;">{{number_format(Session::get('Cart')->totalPrice)}} Đ</h5>
+										</div>
+									</div>
+									@endif
                                     </div>
                                     <div class="select-button">
 										<a href="#" class="primary-btn view-card"><span style="color:white;"> -Xem giỏ hàng- </span> </a>
@@ -360,5 +389,31 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 	<!-- Bootstrap theme -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+<script>
+    function AddCart(product_id){
+        $.ajax({
+            url: 'Add-Cart'+product_id,
+            type: 'GET',
+        }).done(function(response){
+            console.log(response)
+            $("#change-item-cart").empty();
+            $("#change-item-cart").html(response)
+            alertify.success('Thêm sản phẩm thành công');
+        });     
+
+        $("#change-item-cart").on("click", ".si-close i" , function(){
+            console.log($(this).data("id"));
+            $.ajax({
+            url: 'Delete-Item-Cart'+$(this).data("id"),
+            type: 'GET',
+        }).done(function(response){
+            console.log(response)
+            $("#change-item-cart").empty();
+            $("#change-item-cart").html(response)
+            alertify.success('Xóa sản phẩm thành công');
+        });
+    });
+    }
+</script>
 </body>
 </html>
