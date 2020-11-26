@@ -68,7 +68,10 @@ Route::post('save-product','App\Http\Controllers\ProductController@save_product'
 Route::post('update-product{product_id}','App\Http\Controllers\ProductController@update_product');
 
 //cart
-Route::post('save-cart','App\Http\Controllers\CartController@save_cart');
-//Route::get('add-to-cart{product_id}','App\Http\Controllers\CartController@getAddtoCart');
 Route::get('Add-Cart{id}','App\Http\Controllers\CartController@AddCart');
 Route::get('Delete-Item-Cart{id}','App\Http\Controllers\CartController@DeleteItemCart');
+Route::get('List-Cart','App\Http\Controllers\CartController@ViewListCart');
+Route::get('Delete-Item-List-Cart{id}','App\Http\Controllers\CartController@DeleteItemListCart');
+Route::get('Save-Item-List-Cart{id}/{quanty}','App\Http\Controllers\CartController@SaveItemListCart');
+Route::get('Create-Bill','App\Http\Controllers\CartController@CreateBill');
+Route::post('Save-Bill','App\Http\Controllers\CartController@SaveBill');

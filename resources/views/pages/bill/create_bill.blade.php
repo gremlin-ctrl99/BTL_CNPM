@@ -65,8 +65,6 @@
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
-                                    <th>Save</th>
-                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,14 +78,12 @@
                                     <td class="p-price first-row">{{number_format($item['productInfo']->product_price)}} Đ</td>
                                     <td class="qua-col first-row">
                                         <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input id="quanty-item-{{$item['productInfo']->product_id}}" type="text" value="{{$item['quanty']}}">
+                                            <div>
+                                                <a>{{$item['quanty']}}</a>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="total-price first-row">{{number_format($item['price'])}} Đ</td>
-                                    <td class="close-td first-row""><i onclick="SaveItemListCart({{$item['productInfo']->product_id}});" class=" ti-save"></i></td>
-                                    <td class="close-td first-row"><i class="ti-close" onclick="DeleteItemListCart({{$item['productInfo']->product_id}});"></i></td>                                    
+                                    <td class="total-price first-row">{{number_format($item['price'])}} Đ</td>                                   
                                 </tr>
                                 @endforeach
                             @endif      
@@ -98,13 +94,19 @@
                         <div class="col-lg-4 offset-lg-8">
                         <div class="proceed-checkout">
                             @if(Session::has("Cart") != null)
+                            <form role="form" action="{{URL::to('/Save-Bill')}}" method="post">
                                 <ul>
-                                <li class="subtotal">Total Quanty<span>{{number_format(Session::get('Cart')->totalQuanty)}}</span>
+                                <li><input type="text" name="customer_name" placeholder="Nhập tên khách hàng"></li>
+                                <li><input type="text" name="customer_add" placeholder="Nhập địa chỉ khách hàng"></li>
+                                <li><input type="number" name="customer_phone" placeholder="Nhập số điện thoại"></li>
+                                <li hidden><input name="status">0</li>
+                                <li class="subtotal">Total Quanty<span name="quanty">{{number_format(Session::get('Cart')->totalQuanty)}}</span>
                                 </li>
-                                <li class="cart-total">Total Price<span>{{number_format(Session::get('Cart')->totalPrice)}} Đ</span>
+                                <li class="cart-total">Total Price<span name="bill">{{number_format(Session::get('Cart')->totalPrice)}}</span><a> Đ</a>
                                 </li>                                   
                                 </ul>
-                                <a href="Create-Bill" class="proceed-btn">PROCEED TO CHECK OUT</a>
+                                <button type="submit" name="add_brand_product" class="proceed-btn">Đặt hàng ngay</button>
+                            </form>
                             @endif
                             </div> 
                         </div>

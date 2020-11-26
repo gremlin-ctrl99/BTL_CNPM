@@ -22,8 +22,12 @@
     </div>
     <div class="select-total">
         <p></p>
-        <span style="color:white;">total:</span>
-        <h5 style="color:white;">{{number_format(Session::get('Cart')->totalPrice)}} Đ</h5>
+        <p></p>
+			<span style="color:white;">total: <a style="color:white;">{{number_format(Session::get('Cart')->totalPrice)}} Đ</a></span>
+        <input hidden id="total-quanty-cart" type="number" value="{{Session::get('Cart')->totalQuanty}}" >
     </div>
+</div>
+<div class="select-button">
+    <a href="{{URL::to('List-Cart')}}" class="primary-btn view-card"><span style="color:white;"> ***Đặt hàng và thanh toán***</span> </a>
 </div>
 @endif
